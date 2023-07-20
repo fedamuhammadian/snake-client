@@ -1,4 +1,5 @@
 let moveCommand = "";
+let connection ;
 const handleUserInput = (key) => {
     if (key === '\u0003') {
       process.exit();
@@ -13,9 +14,13 @@ const handleUserInput = (key) => {
     } else if (key === 'd') {
       moveCommand = "Move: right";
     }
+    if (connection && moveCommand) {
+        connection.write(moveCommand);
+      }
   };
   
-  const setupInput = () => {
+  const setupInput = (conn) => {
+    connection = conn;
     const stdin = process.stdin;
     stdin.setRawMode(true);
     stdin.setEncoding("utf8");
