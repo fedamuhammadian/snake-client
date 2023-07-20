@@ -1,17 +1,7 @@
-const net = require("net");
+const { connect } = require('./client.js');
+const { setupInput } = require("./input");
 
-// establishes a connection with the game server
-const connect = function () {
-  const conn = net.createConnection({
-    host: "localhost", 
-    port: 50541, 
-  });
-
-  // interpret incoming data as text
-  conn.setEncoding("utf8");
-
-  return conn;
-};
-
+const conn = connect (); 
 console.log("Connecting ...");
-connect();
+
+setupInput(conn);
